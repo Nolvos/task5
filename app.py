@@ -71,18 +71,19 @@ elif accuracy >= 0.5:
     print('Very Good')
 else:
     print('49% or less. Try again.')
-@app.route('/')
-def index():
-    return render_template('index.html')  # Serve the HTML file
-
-
 @app.route('/api/check_accuracy', methods=['POST'])
 def calculate_accuracy():
-    spoken_text = request.get_json().get('spokenText', '')
-    print('Received spoken text:', spoken_text)  # Print the spoken text
-    return jsonify({'accuracy': 0.85})  # Replace with a static accuracy or actual logic
+    spoken_text = request.get_json().get('spokenText', '').lower()  # Convert to lowercase for case-insensitive comparison
+    story_content = stories[currentStoryIndex]['content'].lower()  # Get the content of the current story
+
+    # Calculate accuracy by comparing spoken text and story content
+    accuracy = similar(spoken_text, story_content)
+
+    return jsonify({'accuracy': accuracy})
 
 
+def similar(a, b):
+    return difflib.SequenceMatcher(None, a, b).ratio()
 
 if __name__ == '__main__':
     app.run()
