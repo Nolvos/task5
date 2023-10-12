@@ -71,6 +71,7 @@ elif accuracy >= 0.5:
     print('Very Good')
 else:
     print('49% or less. Try again.')
+    
 @app.route('/api/check_accuracy', methods=['POST'])
 def calculate_accuracy():
     spoken_text = request.get_json().get('spokenText', '').lower()  # Convert to lowercase for case-insensitive comparison
