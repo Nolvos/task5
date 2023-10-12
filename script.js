@@ -43,6 +43,7 @@ recognition.onresult = (event) => {
 recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
+
 async function checkAccuracy() {
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
     console.log('Spoken text:', spokenText);
