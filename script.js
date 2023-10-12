@@ -47,10 +47,19 @@ recognition.onerror = (event) => {
 async function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
 
-  // TODO: Send a request to the server to calculate accuracy based on spokenText
-  // Replace this with your actual accuracy calculation logic
+  // Send a POST request to the server to calculate accuracy
+  const response = await fetch('/api/check_accuracy', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ spokenText })
+  });
 
-  // For demonstration, let's assume a random accuracy between 0 and 1
-  const accuracy = Math.random();
-  document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}`;
+  if (response.ok) {
+    const result = await response.json();
+    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result}`;
+  } else {
+    console.error('Failed to check accuracy:', response.statusText);
+  }
 }
