@@ -44,20 +44,20 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 async function checkAccuracy() {
-  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
+    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
 
-  const response = await fetch('https://task5-nolvos.vercel.app/api/check_accuracy', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ spokenText })
-  });
+    const response = await fetch('https://task5-nolvos.vercel.app/api/check_accuracy', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ spokenText })
+    });
 
-  if (response.ok) {
-    const result = await response.json();
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy}`;
-  } else {
-    console.error('Failed to check accuracy:', response.statusText);
-  }
+    if (response.ok) {
+        const result = await response.json();
+        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy * 100}%`;
+    } else {
+        console.error('Failed to check accuracy:', response.statusText);
+    }
 }
