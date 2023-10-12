@@ -44,14 +44,17 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 async function checkAccuracy() {
-  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase(); // Convert to lowercase for case-insensitive comparison
+    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
+    console.log('Spoken text:', spokenText);
 
-  // Get the current story content and convert it to lowercase
-  const storyContent = stories[currentStoryIndex].content.toLowerCase();
+    const storyContent = stories[currentStoryIndex].content.toLowerCase();
+    console.log('Story content:', storyContent);
 
-  // Calculate a simple accuracy as the percentage of words in the spoken text that match the story content
-  const spokenWords = spokenText.split(' ');
-  const storyWords = storyContent.split(' ');
+    const spokenWords = spokenText.split(' ');
+    console.log('Spoken words:', spokenWords);
+
+    const storyWords = storyContent.split(' ');
+    console.log('Story words:', storyWords);
 
   let matchCount = 0;
 
