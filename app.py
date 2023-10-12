@@ -1,4 +1,4 @@
-import difflib
+
 import os
 import librosa
 import numpy as np
@@ -7,6 +7,7 @@ from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from flask import Flask, request, jsonify
+from difflib import SequenceMatcher
 
 app = Flask(__name__)
 
@@ -75,17 +76,16 @@ else:
     
 @app.route('/api/check_accuracy', methods=['POST'])
 def calculate_accuracy():
-    spoken_text = request.get_json().get('spokenText', '').lower()  # Convert to lowercase for case-insensitive comparison
-    story_content = stories[currentStoryIndex]['content'].lower()  # Get the content of the current story
+    spoken_text = request.get_json().get('spokenText', '').lower()
+    story_content = stories[currentStoryIndex]['content'].lower()
 
-    # Calculate accuracy by comparing spoken text and story content
-    accuracy = similar(spoken_text, story_content)
+    similarity_ratio = similar(spoken_text, story_content)
 
-    return jsonify({'accuracy': accuracy})
+    return jsonify({'accuracy': similarity_ratio})
 
 
 def similar(a, b):
-    return difflib.SequenceMatcher(None, a, b).ratio()
+    return SequenceMatcher(None, a, b).ratio()
 
 if __name__ == '__main__':
     app.run()
