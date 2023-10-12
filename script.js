@@ -46,8 +46,7 @@ recognition.onerror = (event) => {
 async function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
 
-  // Send a POST request to the server to calculate accuracy
-  const response = await fetch('/api/check_accuracy', {
+  const response = await fetch('https://task5-nolvos.vercel.app/api/check_accuracy', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -57,7 +56,7 @@ async function checkAccuracy() {
 
   if (response.ok) {
     const result = await response.json();
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result}`;
+    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy}`;
   } else {
     console.error('Failed to check accuracy:', response.statusText);
   }
