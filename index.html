@@ -21,13 +21,16 @@
     <div id="story-card" class="story-card">
       <h2 id="story-title"></h2>
       <p id="story-content"></p>
-      <button id="checkAccuracy" onclick="checkAccuracy()">Check Accuracy</button>
-<p id="accuracyResult">Accuracy Result: </p>
+      <button onclick="displayNextStory()">Next Story</button>
     </div>
 
     <!-- Open Mic feature -->
     <button id="startRecording">Start Recording</button>
     <p id="spokenText">Spoken Text: </p>
+
+    <!-- Check Accuracy button -->
+    <button id="checkAccuracy" onclick="checkAccuracy()">Check Accuracy</button>
+    <p id="accuracyResult">Accuracy Result: </p>
   </div>
 
   <script>
@@ -76,6 +79,25 @@
     recognition.onerror = (event) => {
       console.error('Speech recognition error:', event.error);
     };
+
+    async function checkAccuracy() {
+      const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
+
+      const response = await fetch('/api/check_accuracy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ spokenText })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result}`;
+      } else {
+        console.error('Failed to check accuracy:', response.statusText);
+      }
+    }
   </script>
 </body>
 </html>
