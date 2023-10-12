@@ -72,18 +72,19 @@ elif accuracy >= 0.5:
 else:
     print('49% or less. Try again.')
 
-@app.route('/')
-def index():
-    return render_template('index.html')  # Serve the HTML file
-
+# Endpoint to calculate accuracy
 @app.route('/api/check_accuracy', methods=['POST'])
-def check_accuracy():
-    spoken_text = request.json['spokenText']
-    # Compare spoken_text with the stories and calculate accuracy (you'll need to implement this)
+def calculate_accuracy():
+    spoken_text = request.get_json().get('spokenText', '')
+    # Replace this with your accuracy calculation logic
+    accuracy = calculate_accuracy_function(spoken_text)
+    return jsonify({'accuracy': accuracy})
 
-    # For demonstration, let's assume a random accuracy between 0 and 1
-    accuracy = round(random.uniform(0, 1), 2)
-    return jsonify(accuracy)
+def calculate_accuracy_function(spoken_text):
+    # Implement your accuracy calculation logic here
+    # For demonstration purposes, we're returning a random accuracy between 0 and 1
+    import random
+    return random.random()
 
 if __name__ == '__main__':
     app.run()
