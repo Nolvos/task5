@@ -54,7 +54,7 @@ async function checkAccuracy() {
     },
     body: JSON.stringify({ spokenText })
   });
-
+  console.log('Server Response:', response);
   if (response.ok) {
       const result = await response.json();
       document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy}`;
