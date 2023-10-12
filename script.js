@@ -45,6 +45,7 @@ recognition.onerror = (event) => {
 };
 async function checkAccuracy() {
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
+    console.log('Spoken text:', spokenText);
 
     const response = await fetch('https://task5-nolvos.vercel.app/api/check_accuracy', {
         method: 'POST',
@@ -56,10 +57,10 @@ async function checkAccuracy() {
 
     if (response.ok) {
         const result = await response.json();
-        const accuracy = (result.accuracy * 100).toFixed(2);  // Convert to percentage and round to 2 decimal places
+        console.log('Accuracy result:', result);
+        const accuracy = (result.accuracy * 100).toFixed(2);
         document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
     } else {
         console.error('Failed to check accuracy:', response.statusText);
     }
 }
-
