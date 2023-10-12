@@ -57,8 +57,15 @@ async function checkAccuracy() {
     const storyWords = storyContent.split(' ');
     console.log('Story words:', storyWords);
 
-    const matchedWords = spokenWords.filter(word => storyWords.includes(word)).length;
     const totalWords = spokenWords.length;
+    let matchedWords = 0;
+
+    // Count the number of words that match between spoken text and story content
+    for (const word of spokenWords) {
+        if (storyWords.includes(word)) {
+            matchedWords++;
+        }
+    }
 
     const accuracy = (matchedWords / totalWords) * 100;
     console.log('Matched words:', matchedWords);
