@@ -72,6 +72,10 @@ elif accuracy >= 0.5:
 else:
     print('49% or less. Try again.')
 
+@app.route('/')
+def index():
+    return render_template('index.html')  # Serve the HTML file
+
 @app.route('/api/check_accuracy', methods=['POST'])
 def check_accuracy():
     spoken_text = request.json['spokenText']
@@ -82,4 +86,4 @@ def check_accuracy():
     return jsonify(accuracy)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
