@@ -78,12 +78,16 @@ else:
     
 @app.route('/api/check_accuracy', methods=['POST'])
 def calculate_accuracy():
-    spoken_text = request.get_json().get('spokenText', '').lower()
-    story_content = stories[currentStoryIndex]['content'].lower()
+    spoken_text = request.get_json().get('spokenText', '')
+    print('Received spoken text:', spoken_text)  # Print the spoken text
 
-    similarity_ratio = similar(spoken_text, story_content)
+    # Calculate accuracy (replace this with your actual logic)
+    accuracy = 0.85
 
-    return jsonify({'accuracy': similarity_ratio})
+    # Return the accuracy with appropriate CORS headers
+    response = jsonify({'accuracy': accuracy})
+    response.headers.add('Access-Control-Allow-Origin', 'https://task5-omega.vercel.app')
+    return response
 
 
 def similar(a, b):
