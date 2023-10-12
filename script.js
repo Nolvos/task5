@@ -1,11 +1,11 @@
 const stories = [
   {
     title: 'The Lion and the Rabbit',
-    content: `Once there was a Lion in the jungle...`,
+    content: `Once there was a Lion in the jungle`,
   },
   {
     title: 'The Hunter and the Pigeons',
-    content: `One day a hunter sets a net to catch birds...`,
+    content: `One day a hunter sets a net to catch birds`,
   },
   // Add more stories in a similar format
 ];
