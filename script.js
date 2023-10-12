@@ -73,3 +73,4 @@ async function checkAccuracy() {
 
     document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy.toFixed(2)}%`;
 }
+
