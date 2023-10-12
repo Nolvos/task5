@@ -1,3 +1,4 @@
+pip install flask-cors
 
 import os
 import librosa
