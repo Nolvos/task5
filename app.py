@@ -8,6 +8,7 @@ from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from difflib import SequenceMatcher
 
 app = Flask(__name__)
