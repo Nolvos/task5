@@ -71,33 +71,18 @@ elif accuracy >= 0.5:
     print('Very Good')
 else:
     print('49% or less. Try again.')
-
-stories = [
-    {
-        'title': 'The Lion and the Rabbit',
-        'content': 'Once there was a Lion in the jungle...'
-    },
-    {
-        'title': 'The Hunter and the Pigeons',
-        'content': 'One day a hunter sets a net to catch birds...'
-    }
-    # Add more stories here
-]
-
-def calculate_accuracy_function(spoken_text, story_content):
-    similarity_ratio = SequenceMatcher(None, spoken_text, story_content).ratio()
-    return similarity_ratio
+@app.route('/')
+def index():
+    return render_template('index.html')  # Serve the HTML file
 
 @app.route('/api/check_accuracy', methods=['POST'])
-def calculate_accuracy():
-    spoken_text = request.get_json().get('spokenText', '')
+def check_accuracy():
+    spoken_text = request.json['spokenText']
+    # Compare spoken_text with the stories and calculate accuracy (you'll need to implement this)
 
-    # Choose the current story content
-    current_story = stories[0]  # You can modify this to choose the correct story
-    story_content = current_story['content']
-
-    accuracy = calculate_accuracy_function(spoken_text, story_content)
-    return jsonify({'accuracy': accuracy})
+    # For demonstration, let's assume a random accuracy between 0 and 1
+    accuracy = round(random.uniform(0, 1), 2)
+    return jsonify(accuracy)
 
 if __name__ == '__main__':
     app.run()
