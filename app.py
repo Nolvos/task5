@@ -76,13 +76,11 @@ def index():
     return render_template('index.html')  # Serve the HTML file
 
 @app.route('/api/check_accuracy', methods=['POST'])
-def check_accuracy():
-    spoken_text = request.json['spokenText']
-    # Compare spoken_text with the stories and calculate accuracy (you'll need to implement this)
+def calculate_accuracy():
+    # Static accuracy for now, replace this with the actual accuracy calculation
+    accuracy = 0.85
+    return jsonify({'accuracy': accuracy})
 
-    # For demonstration, let's assume a random accuracy between 0 and 1
-    accuracy = round(random.uniform(0, 1), 2)
-    return jsonify(accuracy)
 
 if __name__ == '__main__':
     app.run()
