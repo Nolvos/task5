@@ -72,5 +72,10 @@ async function checkAccuracy() {
     console.log('Total words:', totalWords);
     console.log('Accuracy:', accuracy);
 
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy.toFixed(2)}%`;
+    // Display the opposite story accuracy
+    const oppositeIndex = (currentStoryIndex + 1) % stories.length;
+    const oppositeAccuracy = 100 - accuracy;
+
+    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 }
+
