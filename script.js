@@ -1,11 +1,11 @@
 const stories = [
   {
     title: 'The Lion and the Rabbit',
-    content: `Once there was a Lion in the jungle`,
+    content: `Once there was a Lion in the jungle...`,
   },
   {
     title: 'The Hunter and the Pigeons',
-    content: `One day a hunter sets a net to catch birds`,
+    content: `One day a hunter sets a net to catch birds...`,
   },
   // Add more stories in a similar format
 ];
@@ -43,22 +43,14 @@ recognition.onresult = (event) => {
 recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
+
 async function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
 
-  // Send a POST request to the server to calculate accuracy
-  const response = await fetch('/api/check_accuracy', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ spokenText })
-  });
+  // TODO: Send a request to the server to calculate accuracy based on spokenText
+  // Replace this with your actual accuracy calculation logic
 
-  if (response.ok) {
-    const result = await response.json();
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result}`;
-  } else {
-    console.error('Failed to check accuracy:', response.statusText);
-  }
+  // For demonstration, let's assume a random accuracy between 0 and 1
+  const accuracy = Math.random();
+  document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}`;
 }
