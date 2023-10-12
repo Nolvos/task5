@@ -56,7 +56,8 @@ async function checkAccuracy() {
 
     if (response.ok) {
         const result = await response.json();
-        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy * 100}%`;
+        const accuracy = (result.accuracy * 100).toFixed(2);  // Convert to percentage and round to 2 decimal places
+        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
     } else {
         console.error('Failed to check accuracy:', response.statusText);
     }
