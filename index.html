@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Very Short Stories with Morals</title>
+  <style>
+    /* Add your CSS styles for story cards here */
+    .story-card {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Very Short Stories with Morals</h1>
+
+    <!-- Display each story as a card -->
+    <div id="story-card" class="story-card">
+      <h2 id="story-title"></h2>
+      <p id="story-content"></p>
+      <button onclick="displayNextStory()">Next Story</button>
+    </div>
+
+    <!-- Open Mic feature -->
+    <button id="startRecording">Start Recording</button>
+    <p id="spokenText">Spoken Text: </p>
+  </div>
+
+  <script>
+    const stories = [
+      {
+        title: 'The Lion and the Rabbit',
+        content: `Once there was a Lion in the jungle...`,
+      },
+      {
+        title: 'The Hunter and the Pigeons',
+        content: `One day a hunter sets a net to catch birds...`,
+      },
+      // Add more stories in a similar format
+    ];
+
+    let currentStoryIndex = 0;
+
+    function displayNextStory() {
+      const storyCard = document.getElementById('story-card');
+      const storyTitle = document.getElementById('story-title');
+      const storyContent = document.getElementById('story-content');
+
+      storyTitle.innerText = stories[currentStoryIndex].title;
+      storyContent.innerText = stories[currentStoryIndex].content;
+
+      currentStoryIndex = (currentStoryIndex + 1) % stories.length;
+    }
+
+    // Display the first story initially
+    displayNextStory();
+
+    // Initialize speech recognition
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+
+    document.getElementById('startRecording').addEventListener('click', () => {
+      recognition.start();
+    });
+
+    recognition.onresult = (event) => {
+      const spokenText = event.results[0][0].transcript;
+      console.log('Spoken text:', spokenText);
+      document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+    };
+  </script>
+</body>
+</html>
