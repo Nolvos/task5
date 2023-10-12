@@ -1,3 +1,4 @@
+/* CSS for story cards */
 /* CSS for body */
 body {
   font-family: Arial, sans-serif;
@@ -5,19 +6,18 @@ body {
   color: #333; /* Dark gray text */
 }
 
-/* CSS for story cards */
 .story-card {
   border: 1px solid #ccc;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: white; /* White background for story cards */
+  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* CSS for header */
 h1 {
-  color: #3498db; /* Blue header text */
+  color: #333;
 }
 
 /* CSS for buttons */
@@ -29,14 +29,14 @@ button {
 }
 
 button#startRecording {
-  background-color: #4CAF50; /* Green button */
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 5px;
 }
 
 button#checkAccuracy {
-  background-color: #3498db; /* Blue button */
+  background-color: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
@@ -51,19 +51,10 @@ button#startRecording:hover, button#checkAccuracy:hover {
   font-size: 16px;
   font-weight: bold;
   margin-top: 10px;
-  color: #e74c3c; /* Red accuracy result text */
 }
 
 /* CSS for spoken text */
 #spokenText {
   font-size: 16px;
   margin-top: 10px;
-}
-
-/* CSS for background color */
-#app {
-  background-color: #f0f0f0; /* Light gray background for the app */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
