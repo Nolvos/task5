@@ -56,8 +56,9 @@ async function checkAccuracy() {
   });
 
   if (response.ok) {
-    const result = await response.json();
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy}`;
+      const result = await response.json();
+      document.getElementById('accuracyResult').innerText = `Accuracy Result: ${result.accuracy}`;
+
   } else {
     console.error('Failed to check accuracy:', response.statusText);
   }
