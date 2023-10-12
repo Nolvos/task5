@@ -75,11 +75,13 @@ else:
 def index():
     return render_template('index.html')  # Serve the HTML file
 
+
 @app.route('/api/check_accuracy', methods=['POST'])
 def calculate_accuracy():
-    # Static accuracy for now, replace this with the actual accuracy calculation
-    accuracy = 0.85
-    return jsonify({'accuracy': accuracy})
+    spoken_text = request.get_json().get('spokenText', '')
+    print('Received spoken text:', spoken_text)  # Print the spoken text
+    return jsonify({'accuracy': 0.85})  # Replace with a static accuracy or actual logic
+
 
 
 if __name__ == '__main__':
