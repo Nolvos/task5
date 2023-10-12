@@ -56,14 +56,21 @@ async function checkAccuracy() {
     const storyWords = storyContent.split(' ');
     console.log('Story words:', storyWords);
 
-  let matchCount = 0;
+    const totalWords = storyWords.length;
+    let matchedWords = 0;
 
-  for (const word of spokenWords) {
-    if (storyWords.includes(word)) {
-      matchCount++;
+    // Count the number of words that match between spoken text and story content
+    for (const word of spokenWords) {
+        if (storyWords.includes(word)) {
+            matchedWords++;
+        }
     }
-  }
 
-  const accuracy = (matchCount / storyWords.length) * 100;
-  document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy.toFixed(2)}%`;
+    const accuracy = (matchedWords / totalWords) * 100;
+    console.log('Matched words:', matchedWords);
+    console.log('Total words:', totalWords);
+    console.log('Accuracy:', accuracy);
+
+    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy.toFixed(2)}%`;
 }
+
