@@ -44,23 +44,23 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 async function checkAccuracy() {
-    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
-    console.log('Spoken text:', spokenText);
+  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase(); // Convert to lowercase for case-insensitive comparison
 
-    const response = await fetch('https://task5-nolvos.vercel.app/api/check_accuracy', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ spokenText })
-    });
+  // Get the current story content and convert it to lowercase
+  const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
-    if (response.ok) {
-        const result = await response.json();
-        console.log('Accuracy result:', result);
-        const accuracy = (result.accuracy * 100).toFixed(2);
-        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
-    } else {
-        console.error('Failed to check accuracy:', response.statusText);
+  // Calculate a simple accuracy as the percentage of words in the spoken text that match the story content
+  const spokenWords = spokenText.split(' ');
+  const storyWords = storyContent.split(' ');
+
+  let matchCount = 0;
+
+  for (const word of spokenWords) {
+    if (storyWords.includes(word)) {
+      matchCount++;
     }
+  }
+
+  const accuracy = (matchCount / storyWords.length) * 100;
+  document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy.toFixed(2)}%`;
 }
