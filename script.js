@@ -43,17 +43,12 @@ recognition.onresult = (event) => {
 recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
-
 async function checkAccuracy() {
-  
-  console.log('checkAccuracy() called');
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   const storyContent = stories[currentStoryIndex].content.toLowerCase();
-  console.log('spokenText:', spokenText);
-  console.log('storyContent:', storyContent);
 
-  // Fetch accuracy using the updated API URL
-  const response = await fetch('https://task5-omega.vercel.app/api/check_accuracy', {
+  // Fetch accuracy using the correct API endpoint
+  const response = await fetch('https://task5-ef7s4q5v7-houssams-projects.vercel.app/api/check_accuracy', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
