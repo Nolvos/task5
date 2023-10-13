@@ -51,18 +51,19 @@ async function checkAccuracy() {
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
     console.log('Story content:', storyContent);
 
-    const spokenWords = spokenText.split(' ').map(word => word.toLowerCase());
+    const spokenWords = spokenText.split(' ');
     console.log('Spoken words:', spokenWords);
 
-    const storyWords = storyContent.split(' ').map(word => word.toLowerCase());
+    const storyWords = storyContent.split(' ');
     console.log('Story words:', storyWords);
 
     const totalWords = spokenWords.length;
     let matchedWords = 0;
 
     // Count the number of words that match between spoken text and story content
-    for (const word of spokenWords) {
-        if (storyWords.includes(word)) {
+    for (const spokenWord of spokenWords) {
+        const normalizedSpokenWord = spokenWord.toLowerCase();
+        if (storyWords.includes(normalizedSpokenWord)) {
             matchedWords++;
         }
     }
