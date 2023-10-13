@@ -43,25 +43,24 @@ recognition.onresult = (event) => {
 recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
+
 async function checkAccuracy() {
-  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
-  const storyContent = stories[currentStoryIndex].content.toLowerCase();
+    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
+    const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
-  // Fetch accuracy using the correct API URL
-  const apiUrl = 'https://task5-ef7s4q5v7-houssams-projects.vercel.app/api/check_accuracy'; // Update this with your correct API URL
-  const response = await fetch(apiUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ spokenText, storyContent })
-  });
+    const response = await fetch('http://127.0.0.1:5000/api/check_accuracy', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ spokenText, storyContent })
+    });
 
-  if (response.ok) {
-    const result = await response.json();
-    const accuracy = result.accuracy.toFixed(2);
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
-  } else {
-    console.error('Failed to check accuracy:', response.statusText);
-  }
+    if (response.ok) {
+        const result = await response.json();
+        const accuracy = result.accuracy.toFixed(2);
+        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
+    } else {
+        console.error('Failed to check accuracy:', response.statusText);
+    }
 }
