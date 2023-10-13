@@ -65,4 +65,3 @@ async function checkAccuracy() {
     console.error('Failed to check accuracy:', response.statusText);
   }
 }
-
