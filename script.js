@@ -48,14 +48,13 @@ async function checkAccuracy() {
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
-    const response = await fetch('/api/check_accuracy', {  // Changed URL to relative path
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ spokenText, storyContent })
-    });
-
+const response = await fetch('/api/check_accuracy', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ spokenText, storyContent })
+});
     if (response.ok) {
         const result = await response.json();
         const accuracy = result.accuracy.toFixed(2);
