@@ -11,8 +11,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from difflib import SequenceMatcher
 
+
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://task5-omega.vercel.app"}})
+CORS(app)
 # Constants
 DATA_DIR = "/content/drive/MyDrive/Speech_Accent/recordings"
 MAX_FEATURE_LENGTH = 2000  # Maximum length for padding/truncating
