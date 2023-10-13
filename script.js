@@ -48,7 +48,7 @@ async function checkAccuracy() {
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
-    const response = await fetch('http://127.0.0.1:5000/api/check_accuracy', {
+    const response = await fetch('/api/check_accuracy', {  // Changed URL to relative path
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -63,4 +63,6 @@ async function checkAccuracy() {
     } else {
         console.error('Failed to check accuracy:', response.statusText);
     }
+}
+
 }
