@@ -31,7 +31,9 @@ const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognit
 recognition.lang = 'en-US';
 
 document.getElementById('startRecording').addEventListener('click', () => {
-  recognition.start();
+  if (recognition && recognition.readyState === 'inactive') {
+    recognition.start();
+  }
 });
 
 recognition.onresult = (event) => {
