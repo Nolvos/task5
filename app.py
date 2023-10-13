@@ -82,13 +82,11 @@ def check_accuracy():
     spoken_text = request.json.get('spokenText', '').lower()
     story_content = request.json.get('storyContent', '').lower()
 
-    # Perform comparison logic here and calculate accuracy
-    # This is a simple example; you can replace it with your own logic
-    matched_words = sum(1 for word in spoken_text.split() if word in story_content.split())
-    total_words = max(len(spoken_text.split()), len(story_content.split()))
-    accuracy = (matched_words / total_words) * 100
+    # Calculate similarity ratio between spoken text and story content
+    similarity_ratio = SequenceMatcher(None, spoken_text, story_content).ratio()
+    accuracy = similarity_ratio * 100
 
     return jsonify({'accuracy': accuracy})
-
+    
 if __name__ == '__main__':
     app.run(debug=True)  # Run the Flask app
