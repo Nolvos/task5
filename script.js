@@ -48,8 +48,8 @@ async function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
-  // Fetch accuracy using the API
-  const response = await fetch('https://task5.vercel.app/api/check_accuracy', {
+  // Fetch accuracy using the updated API URL
+  const response = await fetch('https://task5-omega.vercel.app/api/check_accuracy', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
