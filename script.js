@@ -45,8 +45,12 @@ recognition.onerror = (event) => {
 };
 
 async function checkAccuracy() {
+  
+  console.log('checkAccuracy() called');
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   const storyContent = stories[currentStoryIndex].content.toLowerCase();
+  console.log('spokenText:', spokenText);
+  console.log('storyContent:', storyContent);
 
   // Fetch accuracy using the updated API URL
   const response = await fetch('https://task5-omega.vercel.app/api/check_accuracy', {
