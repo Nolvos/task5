@@ -79,4 +79,3 @@ async function checkAccuracy() {
 
     document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 }
-
