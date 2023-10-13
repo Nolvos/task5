@@ -48,6 +48,7 @@ async function checkAccuracy() {
     console.log('Checking accuracy...');
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
+    console.log('Story Content:', storyContent);
 
     console.log('Spoken text:', spokenText);
     console.log('Story content:', storyContent);
