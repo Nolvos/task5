@@ -29,6 +29,7 @@ main {
   margin-bottom: 20px;
   width: 80%;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .story-card h2 {
@@ -47,6 +48,7 @@ main {
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .mic-button:hover, #checkAccuracy:hover {
