@@ -11,7 +11,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from difflib import SequenceMatcher
 
-
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "https://task5-omega.vercel.app"}})
 # Constants
@@ -79,17 +78,17 @@ else:
     
 
 @app.route('/api/check_accuracy', methods=['POST'])
-def calculate_accuracy():
-    spoken_text = request.get_json().get('spokenText', '')
-    # Replace this with your accuracy calculation logic
-    accuracy = calculate_accuracy_function(spoken_text)
+def check_accuracy():
+    spoken_text = request.json.get('spokenText', '').lower()
+    story_content = request.json.get('storyContent', '').lower()
+
+    # Perform comparison logic here and calculate accuracy
+    # This is a simple example; you can replace it with your own logic
+    matched_words = sum(1 for word in spoken_text.split() if word in story_content.split())
+    total_words = max(len(spoken_text.split()), len(story_content.split()))
+    accuracy = (matched_words / total_words) * 100
+
     return jsonify({'accuracy': accuracy})
 
-def calculate_accuracy_function(spoken_text):
-    # Implement your accuracy calculation logic here
-    # For demonstration purposes, we're returning a random accuracy between 0 and 1
-    import random
-    return random.random()
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)  # Run the Flask app
