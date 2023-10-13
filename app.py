@@ -77,20 +77,18 @@ else:
     print('49% or less. Try again.')
     
 
-app = Flask(__name__)
 
 @app.route('/api/check_accuracy', methods=['POST'])
 def check_accuracy():
     spoken_text = request.json.get('spokenText', '').lower()
     story_content = request.json.get('storyContent', '').lower()
 
-    # Perform comparison logic here and calculate accuracy
-    # This is a simple example; you can replace it with your own logic
-    matched_words = sum(1 for word in spoken_text.split() if word in story_content.split())
-    total_words = max(len(spoken_text.split()), len(story_content.split()))
+    spoken_words = set(spoken_text.split())
+    story_words = set(story_content.split())
+
+    matched_words = len(spoken_words.intersection(story_words))
+    total_words = max(len(spoken_words), len(story_words))
+
     accuracy = (matched_words / total_words) * 100
 
     return jsonify({'accuracy': accuracy})
-
-if __name__ == '__main__':
-    app.run(debug=True)  # Run the Flask app
