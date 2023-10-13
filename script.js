@@ -46,35 +46,22 @@ recognition.onerror = (event) => {
 
 
 async function checkAccuracy() {
-    console.log('Checking accuracy...');
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
-    console.log('Story Content:', storyContent);
-    console.log('Spoken text:', spokenText);
-    console.log('Story content:', storyContent);
 
-    const apiUrl = 'https://task5-omega.vercel.app/api/check_accuracy';  // Update this with the correct API URL
+    const response = await fetch('http://127.0.0.1:5000/api/check_accuracy', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ spokenText, storyContent })
+    });
 
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ spokenText, storyContent })
-        });
-
-        console.log('API Response:', response);
-
-        if (response.ok) {
-            const result = await response.json();
-            const accuracy = result.accuracy.toFixed(2);
-            document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
-        } else {
-            console.error('Failed to check accuracy:', response.statusText);
-        }
-    } catch (error) {
-        console.error('Error:', error);
+    if (response.ok) {
+        const result = await response.json();
+        const accuracy = result.accuracy.toFixed(2);
+        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
+    } else {
+        console.error('Failed to check accuracy:', response.statusText);
     }
 }
-
