@@ -45,16 +45,16 @@ recognition.onerror = (event) => {
 };
 
 async function checkAccuracy() {
-    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
+    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim();
     console.log('Spoken text:', spokenText);
 
-    const storyContent = stories[currentStoryIndex].content.toLowerCase();
+    const storyContent = stories[currentStoryIndex].content;
     console.log('Story content:', storyContent);
 
-    const spokenWords = spokenText.split(' ');
+    const spokenWords = spokenText.toLowerCase().split(' ');
     console.log('Spoken words:', spokenWords);
 
-    const storyWords = storyContent.split(' ');
+    const storyWords = storyContent.toLowerCase().split(' ');
     console.log('Story words:', storyWords);
 
     const totalWords = spokenWords.length;
