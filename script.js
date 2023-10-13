@@ -45,22 +45,23 @@ recognition.onerror = (event) => {
 };
 
 async function checkAccuracy() {
-    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
-    const storyContent = stories[currentStoryIndex].content.toLowerCase();
+  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
+  const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
-    const response = await fetch('http://127.0.0.1:5000/api/check_accuracy', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ spokenText, storyContent })
-    });
+  // Fetch accuracy using the API
+  const response = await fetch('https://task5.vercel.app/api/check_accuracy', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ spokenText, storyContent })
+  });
 
-    if (response.ok) {
-        const result = await response.json();
-        const accuracy = result.accuracy.toFixed(2);
-        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
-    } else {
-        console.error('Failed to check accuracy:', response.statusText);
-    }
+  if (response.ok) {
+    const result = await response.json();
+    const accuracy = result.accuracy.toFixed(2);
+    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
+  } else {
+    console.error('Failed to check accuracy:', response.statusText);
+  }
 }
