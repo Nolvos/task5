@@ -51,10 +51,10 @@ async function checkAccuracy() {
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
     console.log('Story content:', storyContent);
 
-    const spokenWords = spokenText.split(' ');
+    const spokenWords = spokenText.split(' ').map(word => word.toLowerCase());
     console.log('Spoken words:', spokenWords);
 
-    const storyWords = storyContent.split(' ');
+    const storyWords = storyContent.split(' ').map(word => word.toLowerCase());
     console.log('Story words:', storyWords);
 
     const totalWords = spokenWords.length;
@@ -78,4 +78,3 @@ async function checkAccuracy() {
 
     document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 }
-
