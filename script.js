@@ -48,7 +48,7 @@ async function checkAccuracy() {
   const storyContent = stories[currentStoryIndex].content.toLowerCase();
 
   // Fetch accuracy using the correct API URL
-  const apiUrl = 'https://task5-omega.vercel.app/api/check_accuracy'; // Update this with your correct API URL
+  const apiUrl = 'https://task5-ef7s4q5v7-houssams-projects.vercel.app/api/check_accuracy'; // Update this with your correct API URL
   const response = await fetch(apiUrl, {
     method: 'POST',
     headers: {
