@@ -82,6 +82,9 @@ def check_accuracy():
     spoken_text = request.json.get('spokenText', '').lower()
     story_content = request.json.get('storyContent', '').lower()
 
+    print('Received spoken text:', spoken_text)
+    print('Received story content:', story_content)
+
     # Perform comparison logic here and calculate accuracy
     # This is a simple example; you can replace it with your own logic
     matched_words = sum(1 for word in spoken_text.split() if word in story_content.split())
