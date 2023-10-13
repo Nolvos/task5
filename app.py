@@ -76,19 +76,22 @@ elif accuracy >= 0.5:
 else:
     print('49% or less. Try again.')
     
-
 @app.route('/api/check_accuracy', methods=['POST'])
-def check_accuracy():
-    spoken_text = request.json.get('spokenText', '').lower()
-    story_content = request.json.get('storyContent', '').lower()
+def calculate_accuracy():
+    spoken_text = request.get_json().get('spokenText', '')
+    print('Received spoken text:', spoken_text)  # Print the spoken text
 
-    # Perform comparison logic here and calculate accuracy
-    # This is a simple example; you can replace it with your own logic
-    matched_words = sum(1 for word in spoken_text.split() if word in story_content.split())
-    total_words = max(len(spoken_text.split()), len(story_content.split()))
-    accuracy = (matched_words / total_words) * 100
+    # Calculate accuracy (replace this with your actual logic)
+    accuracy = 0.85
 
-    return jsonify({'accuracy': accuracy})
+    # Return the accuracy with appropriate CORS headers
+    response = jsonify({'accuracy': accuracy})
+    response.headers.add('Access-Control-Allow-Origin', 'https://task5-omega.vercel.app')
+    return response
+
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)  # Adjust host and port as needed
-
+    app.run()
