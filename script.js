@@ -46,35 +46,21 @@ recognition.onerror = (event) => {
 
 async function checkAccuracy() {
     const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
-    console.log('Spoken text:', spokenText);
-
     const storyContent = stories[currentStoryIndex].content.toLowerCase();
-    console.log('Story content:', storyContent);
 
-    const spokenWords = spokenText.split(' ');
-    console.log('Spoken words:', spokenWords);
+    const response = await fetch('http://127.0.0.1:5000/api/check_accuracy', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ spokenText, storyContent })
+    });
 
-    const storyWords = storyContent.split(' ');
-    console.log('Story words:', storyWords);
-
-    let matchedWords = 0;
-
-    // Count the number of words that match between spoken text and story content (case-insensitive)
-    for (const spokenWord of spokenWords) {
-        const normalizedSpokenWord = spokenWord.toLowerCase();
-        if (storyWords.includes(normalizedSpokenWord)) {
-            matchedWords++;
-        }
+    if (response.ok) {
+        const result = await response.json();
+        const accuracy = result.accuracy.toFixed(2);
+        document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy}%`;
+    } else {
+        console.error('Failed to check accuracy:', response.statusText);
     }
-
-    const totalWords = Math.max(spokenWords.length, storyWords.length);  // Take the maximum number of words
-    const accuracy = (matchedWords / totalWords) * 100;
-    console.log('Matched words:', matchedWords);
-    console.log('Total words:', totalWords);
-    console.log('Accuracy:', accuracy);
-
-    // Display the opposite story accuracy
-    const oppositeAccuracy = 100 - accuracy;
-
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 }
