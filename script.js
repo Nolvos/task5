@@ -57,13 +57,12 @@ async function checkAccuracy() {
     const storyWords = storyContent.split(' ');
     console.log('Story words:', storyWords);
 
-    const totalWords = spokenWords.length;
+    const totalWords = storyWords.length;
     let matchedWords = 0;
 
-    // Count the number of words that match between spoken text and story content
-    for (const spokenWord of spokenWords) {
-        const normalizedSpokenWord = spokenWord.toLowerCase();
-        if (storyWords.includes(normalizedSpokenWord)) {
+    // Count the number of words that match between spoken text and story content (case-insensitive)
+    for (const word of spokenWords) {
+        if (storyWords.includes(word.toLowerCase())) {
             matchedWords++;
         }
     }
@@ -73,9 +72,6 @@ async function checkAccuracy() {
     console.log('Total words:', totalWords);
     console.log('Accuracy:', accuracy);
 
-    // Display the opposite story accuracy
-    const oppositeIndex = (currentStoryIndex + 1) % stories.length;
-    const oppositeAccuracy = 100 - accuracy;
-
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
+    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${accuracy.toFixed(2)}%`;
 }
+
