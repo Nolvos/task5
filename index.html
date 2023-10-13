@@ -8,27 +8,22 @@
 </head>
 <body>
   <div id="app">
-    <header>
-      <h1>Very Short Stories with Morals</h1>
-    </header>
+    <h1>Very Short Stories with Morals</h1>
 
-    <main>
-      <div id="story-card" class="story-card">
-        <h2 id="story-title"></h2>
-        <p id="story-content"></p>
-        <button onclick="displayNextStory()">Next Story</button>
-      </div>
+    <!-- Display each story as a card -->
+    <div id="story-card" class="story-card">
+      <h2 id="story-title"></h2>
+      <p id="story-content"></p>
+      <button onclick="displayNextStory()">Next Story</button>
+    </div>
 
-      <div class="mic-section">
-        <button id="startRecording" class="mic-button">Start Recording</button>
-        <p id="spokenText" class="spoken-text">Spoken Text: </p>
-      </div>
+    <!-- Open Mic feature -->
+    <button id="startRecording">Start Recording</button>
+    <p id="spokenText">Spoken Text: </p>
 
-  <div class="accuracy-section">
+    <!-- Check Accuracy button -->
     <button id="checkAccuracy" onclick="checkAccuracy()">Check Accuracy</button>
-    <p id="accuracyResult" class="accuracy-result">Accuracy Result: </p>
-  </div>
-    </main>
+    <p id="accuracyResult">Accuracy Result: </p>
   </div>
 
   <script src="script.js"></script>
