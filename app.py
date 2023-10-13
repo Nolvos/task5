@@ -82,16 +82,26 @@ def check_accuracy():
     spoken_text = request.json.get('spokenText', '').lower()
     story_content = request.json.get('storyContent', '').lower()
 
+    print('Spoken Text:', spoken_text)
+    print('Story Content:', story_content)
+
     # Split the spoken text and story content into words
     spoken_words = set(spoken_text.split())
     story_words = set(story_content.split())
 
+    print('Spoken Words:', spoken_words)
+    print('Story Words:', story_words)
+
     # Calculate the number of common words
     common_words_count = len(spoken_words.intersection(story_words))
+
+    print('Common Words Count:', common_words_count)
 
     # Calculate accuracy as a percentage
     total_words_in_story = len(story_words)
     accuracy = (common_words_count / total_words_in_story) * 100
+
+    print('Accuracy:', accuracy)
 
     return jsonify({'accuracy': accuracy})
     
