@@ -44,37 +44,53 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 
-async function checkAccuracy() {
-    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
-    console.log('Spoken text:', spokenText);
+function checkAccuracy() {
+  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
+  console.log('Spoken text:', spokenText);
 
-    const storyContent = stories[currentStoryIndex].content.toLowerCase();
-    console.log('Story content:', storyContent);
+  const storyContent = stories[currentStoryIndex].content.toLowerCase();
+  console.log('Story content:', storyContent);
 
-    const spokenWords = spokenText.split(' ');
-    console.log('Spoken words:', spokenWords);
+  const spokenWords = spokenText.split(' ');
+  console.log('Spoken words:', spokenWords);
 
-    const storyWords = storyContent.split(' ');
-    console.log('Story words:', storyWords);
+  const storyWords = storyContent.split(' ');
+  console.log('Story words:', storyWords);
 
-    let matchedWords = 0;
+  let matchedWords = 0;
 
-    // Count the number of words that match between spoken text and story content (case-insensitive)
-    for (const spokenWord of spokenWords) {
-        const normalizedSpokenWord = spokenWord.toLowerCase();
-        if (storyWords.includes(normalizedSpokenWord)) {
-            matchedWords++;
-        }
+  // Count the number of words that match between spoken text and story content (case-insensitive)
+  for (const spokenWord of spokenWords) {
+    const normalizedSpokenWord = spokenWord.toLowerCase();
+    if (storyWords.includes(normalizedSpokenWord)) {
+      matchedWords++;
     }
+  }
 
-    const totalWords = Math.max(spokenWords.length, storyWords.length);  // Take the maximum number of words
-    const accuracy = (matchedWords / totalWords) * 100;
-    console.log('Matched words:', matchedWords);
-    console.log('Total words:', totalWords);
-    console.log('Accuracy:', accuracy);
+  const totalWords = storyWords.length;  // Total words in the story
+  const accuracy = (matchedWords / totalWords) * 100;
+  console.log('Matched words:', matchedWords);
+  console.log('Total words:', totalWords);
+  console.log('Accuracy:', accuracy);
 
-    // Display the opposite story accuracy
-    const oppositeAccuracy = 100 - accuracy;
+  // Display the opposite story accuracy
+  const oppositeAccuracy = 100 - accuracy;
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
+  // Determine the feedback based on accuracy
+  let feedback = '';
+  if (oppositeAccuracy >= 75) {
+    feedback = 'Excellent';
+  } else if (oppositeAccuracy >= 50) {
+    feedback = 'Very Good';
+  } else {
+    feedback = 'Let\'s try again.';
+  }
+
+  // Convert feedback to speech
+  const speechSynthesis = window.speechSynthesis;
+  const speechMessage = new SpeechSynthesisUtterance(feedback);
+  speechSynthesis.speak(speechMessage);
 }
+
